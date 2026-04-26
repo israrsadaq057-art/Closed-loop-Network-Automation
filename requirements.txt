@@ -1,0 +1,5 @@
+requests
+pyyaml
+paramiko
+schedule
+python-dotenv

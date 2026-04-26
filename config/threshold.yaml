@@ -1,0 +1,12 @@
+# Failure Thresholds for Network Monitoring
+
+thresholds:
+  ping:
+    packet_loss_percent: 20
+    max_latency_ms: 100
+    consecutive_failures: 3
+  
+  http:
+    max_response_time_ms: 5000
+    allowed_status_codes: [200, 301, 302]
+    consecutive_failures: 2

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed-Loop Network Automation | Israr Sadaq</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0c10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eef2ff;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            border-bottom: 1px solid #2a2f3a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffffff, #7bc9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            background: #13253a;
+            color: #5ee0fa;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .cycles {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .cycle-card {
+            background: #11161f;
+            border-radius: 20px;
+            padding: 1rem;
+            flex: 1;
+            text-align: center;
+            border: 1px solid #26303f;
+        }
+        .cycle-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f97316;
+        }
+        .history {
+            background: #0d121c;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #253041;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #1c2533;
+        }
+        th {
+            background: #0f1622;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6e7c94;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="badge">CLOSED-LOOP AUTOMATION</div>
+        <h1>Self-Healing Network Monitor</h1>
+        <p>Detect -> Analyze -> Decide -> Act -> Verify</p>
+    </div>
+
+    <div class="cycles">
+        <div class="cycle-card">
+            <div class="cycle-number">01</div>
+            <strong>DETECT</strong>
+            <p>Ping Gateway and DNS every 30 seconds</p>
+        </div>
+        <div class="cycle-card">
+            <div class="cycle-number">02</div>
+            <strong>ANALYZE</strong>
+            <p>Count consecutive failures against threshold</p>
+        </div>
+        <div class="cycle-card">
+            <div class="cycle-number">03</div>
+            <strong>DECIDE</strong>
+            <p>Prioritize gateway issues first</p>
+        </div>
+        <div class="cycle-card">
+            <div class="cycle-number">04</div>
+            <strong>ACT</strong>
+            <p>Flush DNS or renew DHCP automatically</p>
+        </div>
+    </div>
+
+    <div class="history">
+        <h3>Remediation History</h3>
+        <table>
+            <thead>
+                <tr><th>Timestamp</th><th>Target</th><th>Action</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>2026-04-26 10:15:23</td><td>Default Gateway</td><td>Renew DHCP</td><td style="color:#4ade80">Resolved</td></tr>
+                <tr><td>2026-04-26 09:42:17</td><td>Google DNS</td><td>Flush DNS</td><td style="color:#4ade80">Resolved</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        Israr Sadaq - CCNA, CCNP | Closed-Loop Network Automation
+    </div>
+</div>
+</body>
+</html>

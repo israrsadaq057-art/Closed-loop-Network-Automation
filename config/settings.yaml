@@ -1,0 +1,44 @@
+# Closed-Loop Network Automation Configuration
+# Author: Israr Sadaq
+
+monitoring:
+  interval_seconds: 30
+  targets:
+    - name: "Default Gateway"
+      ip: "192.168.1.1"
+      type: "ping"
+      failure_threshold: 3
+    
+    - name: "Google DNS"
+      ip: "8.8.8.8"
+      type: "ping"
+      failure_threshold: 5
+
+remediation:
+  max_retries: 3
+  cooldown_seconds: 300
+  actions:
+    - name: "flush_dns"
+      enabled: true
+      command: "ipconfig /flushdns"
+    
+    - name: "renew_dhcp"
+      enabled: true
+      command: "ipconfig /release && ipconfig /renew"
+    
+    - name: "restart_adapter"
+      enabled: true
+      command: "netsh interface set interface Ethernet disable && netsh interface set interface Ethernet enable"
+
+alerting:
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender: "your-email@gmail.com"
+    recipient: "your-email@gmail.com"
+
+logging:
+  level: "INFO"
+  max_files: 10
+  max_size_mb: 5

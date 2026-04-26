@@ -1,0 +1,15 @@
+2026-04-26 13:15:06,296 - __main__ - INFO - ============================================================
+2026-04-26 13:15:06,298 - __main__ - INFO - Closed-Loop Network Automation System
+2026-04-26 13:15:06,298 - __main__ - INFO - Author: Israr Sadaq - CCNA, CCNP
+2026-04-26 13:15:06,300 - __main__ - INFO - ============================================================
+2026-04-26 13:15:06,312 - __main__ - INFO - Starting continuous monitoring
+2026-04-26 13:15:06,312 - __main__ - INFO - === Closed-Loop Cycle 1 ===
+2026-04-26 13:15:06,383 - monitor - INFO - Target Default Gateway is UP
+2026-04-26 13:15:06,431 - monitor - INFO - Target Google DNS is UP
+2026-04-26 13:15:36,446 - __main__ - INFO - === Closed-Loop Cycle 2 ===
+2026-04-26 13:15:36,502 - monitor - INFO - Target Default Gateway is UP
+2026-04-26 13:15:36,560 - monitor - INFO - Target Google DNS is UP
+2026-04-26 13:16:06,564 - __main__ - INFO - === Closed-Loop Cycle 3 ===
+2026-04-26 13:16:06,609 - monitor - INFO - Target Default Gateway is UP
+2026-04-26 13:16:06,667 - monitor - INFO - Target Google DNS is UP
+2026-04-26 13:16:12,778 - __main__ - INFO - System shutdown
