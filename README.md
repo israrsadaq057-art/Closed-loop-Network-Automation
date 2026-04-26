@@ -1,40 +1,95 @@
-\# Closed-Loop Network Automation System
+# Closed-Loop Network Automation
 
+Self-healing network monitoring that detects, analyzes, and fixes connectivity issues automatically.
 
+**Author:** Israr Sadaq — CCNA, CCNP  
+**Role:** Optical Networks and Automation Engineer, Fraunhofer HHI Berlin  
+**Location:** Berlin, Germany
 
-\## Author
+---
 
-\*\*Israr Sadaq\*\*
+## Table of Contents
 
-\- CCNA, CCNP Certified
+1. Overview
+2. How It Works
+3. What It Monitors
+4. What It Fixes
+5. Quick Start
+6. Configuration
+7. Project Structure
+8. Real-World Scenarios
+9. Logging
+10. Extending the System
+11. Links
+12. Contact
 
-\- Optical Networks and Automation Engineer at Fraunhofer HHI Berlin
+---
 
-\- 5+ years experience
+## Overview
 
+This system runs a continuous closed-loop automation cycle every 30 seconds. It monitors your network, detects failures, and executes automatic remediation without human intervention.
 
+**The Problem:** Network issues waste time. Users lose connectivity. IT admins run manual diagnostics. Minutes become hours.
 
-\## What This Project Does
+**The Solution:** Automate the entire troubleshooting workflow. When the network breaks, the system fixes itself.
 
-This system automatically monitors your network and fixes common problems without human intervention.
+---
 
+## How It Works
 
+The system runs four stages continuously:
 
-\## The Four Stages
+| Stage | Action | Description |
+|-------|--------|-------------|
+| 1 DETECT | Ping and HTTP checks | Tests gateway and DNS every 30 seconds |
+| 2 ANALYZE | Count consecutive failures | Triggers at 3 failures (configurable) |
+| 3 DECIDE | Select remediation | Prioritizes gateway issues first |
+| 4 ACT | Execute fix command | Runs flush DNS, renew DHCP, or reset adapter |
+| VERIFY | Re-check target | Confirms fix worked or escalates |
 
-1\. \*\*DETECT\*\* - Pings gateway and DNS every 30 seconds
+---
 
-2\. \*\*ANALYZE\*\* - Counts consecutive failures
+## What It Monitors
 
-3\. \*\*DECIDE\*\* - Determines which fix to apply
+| Layer | Target | Method |
+|-------|--------|--------|
+| Network | Default Gateway | ICMP ping |
+| Network | Google DNS (8.8.8.8) | ICMP ping |
+| Interface | Ethernet/WiFi adapter | System check |
 
-4\. \*\*ACT\*\* - Executes remediation automatically
+**Expandable to:** Switches, routers, firewalls, servers, APIs, wireless APs, VPN tunnels.
 
+---
 
+## What It Fixes
 
-\## How to Run
+| Failure Type | Detection Threshold | Remediation Action |
+|--------------|--------------------|--------------------|
+| DNS cache corruption | 3 failed pings | `ipconfig /flushdns` |
+| DHCP lease expired | No IP address | `ipconfig /release && /renew` |
+| Adapter driver crash | Interface down | Reset network adapter |
+| ARP table stale | Gateway unreachable | `arp -d` |
+
+All actions are logged with timestamps. Failed remediations trigger alerts.
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Windows 10/11 or Windows Server
+- Python 3.7 or higher
+- Administrator privileges
+
+### Installation
 
 ```bash
+# Clone or download the project
+cd D:\Israr-Projects\Closed-Loop-Network-Automation
 
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the automation
 python src/main.py
-
