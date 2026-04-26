@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed-Loop Network Automation | Israr Sadaq | IT Admin & Network Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c10;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            color: #eef2ff;
+            padding: 2rem 1.5rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: linear-gradient(135deg, #0f172f 0%, #0a0f1c 100%);
+            border-radius: 32px;
+            border: 1px solid #2d3a5e;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7bc9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-title {
+            color: #7dd3fc;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .badge-cert {
+            background: #1e2a3e;
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #bbd7fb;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #111827;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #cbd5e6;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .contact-item:hover {
+            background: #1f2a44;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid #2a2f3a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            background: #13253a;
+            color: #5ee0fa;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #7bc9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .sub {
+            color: #8f9bb3;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Architecture Flow */
+        .architecture {
+            background: #0d121c;
+            border-radius: 32px;
+            border: 1px solid #253041;
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .flow-stages {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stage {
+            flex: 1;
+            min-width: 180px;
+            background: #11161f;
+            border-radius: 24px;
+            padding: 1.2rem;
+            text-align: center;
+            border-left: 4px solid #f97316;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .stage:hover {
+            transform: translateY(-5px);
+            background: #1a1f2e;
+        }
+
+        .stage-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f97316;
+        }
+
+        .stage-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .stage-detail {
+            font-size: 0.8rem;
+            color: #9aa9c1;
+            display: none;
+            margin-top: 0.8rem;
+        }
+
+        .stage.active .stage-detail {
+            display: block;
+        }
+
+        /* Monitoring Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .category-card {
+            background: #11161f;
+            border: 1px solid #26303f;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            border-color: #3e6b9b;
+            transform: translateY(-3px);
+        }
+
+        .category-header {
+            background: #0d121b;
+            padding: 1rem;
+            border-bottom: 1px solid #1f2a36;
+            font-weight: 600;
+            color: #5ee0fa;
+        }
+
+        .category-items {
+            padding: 1rem;
+        }
+
+        .monitor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #1e2835;
+        }
+
+        .monitor-name {
+            font-size: 0.85rem;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            background: #1e2a3e;
+            color: #4ade80;
+        }
+
+        /* Clickable Solution Blocks */
+        .remediation-section {
+            background: #0d121c;
+            border-radius: 28px;
+            border: 1px solid #253041;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .remediation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .remediation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .remediation-card {
+            background: #11161f;
+            border-radius: 20px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #26303f;
+        }
+
+        .remediation-card:hover {
+            background: #1a1f2e;
+            border-color: #f97316;
+        }
+
+        .remediation-card h4 {
+            color: #f97316;
+            margin-bottom: 0.5rem;
+        }
+
+        .remediation-detail {
+            display: none;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #cbd5e6;
+            border-left: 2px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+
+        .remediation-card.active .remediation-detail {
+            display: block;
+        }
+
+        /* Decision Tree */
+        .decision-tree {
+            background: #0d121c;
+            border-radius: 28px;
+            border: 1px solid #253041;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tree-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tree-node {
+            background: #0f1622;
+            border-left: 3px solid #f97316;
+            padding: 0.8rem;
+            border-radius: 16px;
+            min-width: 200px;
+            flex: 1;
+        }
+
+        .tree-question {
+            font-weight: 700;
+            color: #ffbc6e;
+        }
+
+        /* Matrix Table */
+        .matrix-section {
+            background: #0d121c;
+            border-radius: 28px;
+            border: 1px solid #253041;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .matrix-table th {
+            text-align: left;
+            padding: 12px 8px;
+            background: #0f1622;
+            border-bottom: 1px solid #2a364a;
+        }
+
+        .matrix-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #1c2533;
+            vertical-align: top;
+        }
+
+        /* GitHub Info */
+        .github-info {
+            background: #0a0f1a;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #202635;
+            font-size: 0.75rem;
+            color: #6e7c94;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .flow-stages {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Professional Profile Card -->
+    <div class="profile-card">
+        <div class="profile-info">
+            <h1>Israr Sadaq</h1>
+            <div class="profile-title">Optical Networks and Automation Engineer | IT Administrator | Network Engineer</div>
+            <div class="profile-badge">
+                <span class="badge-cert">CCNA Certified</span>
+                <span class="badge-cert">CCNP Certified</span>
+                <span class="badge-cert">5+ Years Experience</span>
+                <span class="badge-cert">Fraunhofer HHI Berlin</span>
+                <span class="badge-cert">M.Sc. Information Engineering</span>
+                <span class="badge-cert">2nd/3rd Level Support 300+ Users</span>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:israrsadaq057@gmail.com" class="contact-item">Email: israrsadaq057@gmail.com</a>
+                <a href="tel:+4915215267799" class="contact-item">Phone: (+49) 15215267799</a>
+                <a href="https://github.com/israrsadaq057-art" target="_blank" class="contact-item">GitHub: israrsadaq057-art</a>
+                <a href="https://www.linkedin.com/in/israr-sadaq-11729b141" target="_blank" class="contact-item">LinkedIn: israr-sadaq</a>
+                <span class="contact-item">Address: Harbigstr.14, 14055, Berlin, Germany</span>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.9rem; color: #b9c3db;">
+                Network Engineer and IT Admin with 5+ years of experience in planning, implementing, and managing Cisco LAN/WAN/WLAN, firewall systems, and PBX telephony. Creator of Closed-Loop Network Automation System - a self-healing network monitoring solution.
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="badge">CLOSED-LOOP NETWORK AUTOMATION</div>
+        <h2>Self-Healing Network Monitoring System</h2>
+        <div class="sub">Detect → Analyze → Decide → Act → Verify | No human intervention required</div>
+    </div>
+
+    <!-- Architecture Flow Stages (Clickable) -->
+    <div class="architecture">
+        <h3 style="margin-bottom: 0.5rem;">The Four Stages of Closed-Loop Automation</h3>
+        <p style="color:#9aa9c1; margin-bottom: 1rem;">Click any stage to see detailed explanation</p>
+        <div class="flow-stages">
+            <div class="stage" data-stage="stage1">
+                <div class="stage-number">01</div>
+                <div class="stage-title">DETECT</div>
+                <div class="stage-detail">Ping gateway (192.168.1.1) and DNS (8.8.8.8) every 30 seconds. HTTP/HTTPS checks for web services. SNMP polling for switch/router status.</div>
+            </div>
+            <div class="stage" data-stage="stage2">
+                <div class="stage-number">02</div>
+                <div class="stage-title">ANALYZE</div>
+                <div class="stage-detail">Count consecutive failures against configured thresholds. Default: 3 failures triggers remediation. Priority mapping for critical devices.</div>
+            </div>
+            <div class="stage" data-stage="stage3">
+                <div class="stage-number">03</div>
+                <div class="stage-title">DECIDE</div>
+                <div class="stage-detail">Determine appropriate remediation action based on failure type. Gateway issues get highest priority. Cooldown period prevents repeated fixes.</div>
+            </div>
+            <div class="stage" data-stage="stage4">
+                <div class="stage-number">04</div>
+                <div class="stage-title">ACT</div>
+                <div class="stage-detail">Execute automatic fixes: flush DNS cache (ipconfig /flushdns), renew DHCP lease (ipconfig /release & /renew), restart network adapter.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monitoring Categories -->
+    <h3 style="margin-bottom: 1rem;">What The System Monitors</h3>
+    <div class="categories-grid">
+        <div class="category-card">
+            <div class="category-header">Layer 1 & 2 - Physical & Switching</div>
+            <div class="category-items">
+                <div class="monitor-item"><span class="monitor-name">Interface Status</span><span class="status-badge">Up/Down</span></div>
+                <div class="monitor-item"><span class="monitor-name">Error Rate / CRC</span><span class="status-badge">&lt;1%</span></div>
+                <div class="monitor-item"><span class="monitor-name">VLAN Health</span><span class="status-badge">Active</span></div>
+                <div class="monitor-item"><span class="monitor-name">STP State</span><span class="status-badge">Forwarding</span></div>
+                <div class="monitor-item"><span class="monitor-name">CDP/LLDP Neighbors</span><span class="status-badge">Connected</span></div>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-header">Layer 3 - Routing & Gateway</div>
+            <div class="category-items">
+                <div class="monitor-item"><span class="monitor-name">Default Gateway</span><span class="status-badge">192.168.1.1</span></div>
+                <div class="monitor-item"><span class="monitor-name">Google DNS</span><span class="status-badge">8.8.8.8</span></div>
+                <div class="monitor-item"><span class="monitor-name">OSPF Neighbors</span><span class="status-badge">Full</span></div>
+                <div class="monitor-item"><span class="monitor-name">BGP Peers</span><span class="status-badge">Established</span></div>
+                <div class="monitor-item"><span class="monitor-name">Routing Table</span><span class="status-badge">Valid</span></div>
+            </div>
+        </div>
+        <div class="category-card">
+            <div class="category-header">Layer 4-7 - Services & Applications</div>
+            <div class="category-items">
+                <div class="monitor-item"><span class="monitor-name">TCP Ports (80,443,22)</span><span class="status-badge">Open</span></div>
+                <div class="monitor-item"><span class="monitor-name">DHCP Server</span><span class="status-badge">Leasing</span></div>
+                <div class="monitor-item"><span class="monitor-name">DNS Resolution</span><span class="status-badge">Working</span></div>
+                <div class="monitor-item"><span class="monitor-name">HTTP Status Codes</span><span class="status-badge">200 OK</span></div>
+                <div class="monitor-item"><span class="monitor-name">API Endpoints</span><span class="status-badge">Healthy</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remediation Actions (Clickable) -->
+    <div class="remediation-section">
+        <div class="remediation-title">Automatic Remediation Actions (Click to see details)</div>
+        <div class="remediation-grid">
+            <div class="remediation-card" data-remediation="flushDNS">
+                <h4>Flush DNS Cache</h4>
+                <p>Command: ipconfig /flushdns</p>
+                <div class="remediation-detail">When DNS cache becomes corrupted, this command clears it. Used when websites resolve incorrectly or ping fails by name but not by IP.</div>
+            </div>
+            <div class="remediation-card" data-remediation="renewDHCP">
+                <h4>Renew DHCP Lease</h4>
+                <p>Command: ipconfig /release && ipconfig /renew</p>
+                <div class="remediation-detail">When IP address expires or conflicts occur, this releases current IP and requests a new one from DHCP server.</div>
+            </div>
+            <div class="remediation-card" data-remediation="restartAdapter">
+                <h4>Restart Network Adapter</h4>
+                <p>Command: netsh interface set interface Ethernet disable/enable</p>
+                <div class="remediation-detail">Resets the entire network stack. Used when other remediations fail. Last resort before manual intervention.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Decision Tree -->
+    <div class="decision-tree">
+        <h3>Decision Tree: When Does Automation Trigger?</h3>
+        <div class="tree-flow">
+            <div class="tree-node">
+                <div class="tree-question">Q1: Is Gateway Reachable?</div>
+                <div>Yes → Monitor continues</div>
+                <div>No → Count failure +1</div>
+            </div>
+            <div class="tree-node">
+                <div class="tree-question">Q2: Failure Count >= 3?</div>
+                <div>No → Continue monitoring</div>
+                <div>Yes → Trigger remediation</div>
+            </div>
+            <div class="tree-node">
+                <div class="tree-question">Q3: In Cooldown Period?</div>
+                <div>Yes → Wait 5 minutes</div>
+                <div>No → Execute fix</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Master Reference Matrix -->
+    <div class="matrix-section">
+        <h3>Complete Automation Matrix</h3>
+        <table class="matrix-table">
+            <thead>
+                <tr><th>Failure Detected</th><th>Detection Method</th><th>Threshold</th><th>Remediation Action</th><th>Escalation</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Gateway Unreachable</td><td>ICMP Ping</td><td>3 failures</td><td>Flush DNS, Renew DHCP</td><td>Email alert if persists</td></tr>
+                <tr><td>DNS Resolution Failure</td><td>Ping 8.8.8.8</td><td>3 failures</td><td>ipconfig /flushdns</td><td>Restart DNS service</td></tr>
+                <tr><td>No IP Address</td><td>ipconfig check</td><td>1 failure</td><td>ipconfig /renew</td><td>Restart adapter</td></tr>
+                <tr><td>High Packet Loss</td><td>Extended ping</td><td>>20% loss</td><td>Check interface errors</td><td>Alert network team</td></tr>
+                <tr><td>Interface Down</td><td>SNMP trap</td><td>Immediate</td><td>Log, no auto-restart</td><td>Critical alert</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- GitHub Repository Info -->
+    <div class="github-info">
+        <p><strong>Project Repository:</strong> https://github.com/israrsadaq057-art/closed-loop-network-automation</p>
+        <p><strong>Live Dashboard:</strong> https://israrsadaq057-art.github.io/closed-loop-network-automation/dashboard/dashboard.html</p>
+        <p><strong>Tech Stack:</strong> Python 3.x | YAML Configuration | PowerShell Commands | Git Version Control</p>
+    </div>
+
+    <div class="footer">
+        Israr Sadaq - Optical Networks and Automation Engineer | Fraunhofer HHI Berlin | CCNA | CCNP<br>
+        Email: israrsadaq057@gmail.com | GitHub: israrsadaq057-art | Berlin, Germany<br>
+        Closed-Loop Network Automation System - Self-healing network monitoring for enterprise environments
+    </div>
+</div>
+
+<script>
+    // Stage click handlers - show/hide details
+    const stages = document.querySelectorAll('.stage');
+    stages.forEach(stage => {
+        stage.addEventListener('click', () => {
+            // Toggle active class on clicked stage
+            stage.classList.toggle('active');
+        });
+    });
+
+    // Remediation card click handlers
+    const remediationCards = document.querySelectorAll('.remediation-card');
+    remediationCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Close other cards
+            remediationCards.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('active');
+                }
+            });
+            // Toggle current card
+            card.classList.toggle('active');
+        });
+    });
+
+    // Auto-expand first stage by default for better UX
+    const firstStage = document.querySelector('.stage');
+    if (firstStage) {
+        firstStage.classList.add('active');
+    }
+
+    // Auto-expand first remediation card
+    const firstCard = document.querySelector('.remediation-card');
+    if (firstCard) {
+        firstCard.classList.add('active');
+    }
+
+    console.log("Closed-Loop Network Automation Diagram Loaded");
+    console.log("Author: Israr Sadaq - CCNA, CCNP");
+</script>
+</body>
+</html>
